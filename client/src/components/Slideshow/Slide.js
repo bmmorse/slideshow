@@ -15,16 +15,14 @@ const DIV_SLIDE = styled.div`
   }
 `;
 
-const Para = styled.p``;
+const Para = styled.p`
+  transition: opacity ease 500ms;
+  // opacity: ${(props) => (props.middle ? '1' : '0')};
+`;
 
 export default class Slide extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.data !== prevProps.data) {
-    }
   }
 
   render() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Slide from './Slide';
 
@@ -22,10 +23,10 @@ const DIV_SLIDES = styled.div`
     left: 100%;
   }
 
-  &.slideForward {
-    animation: 500ms slideF ease forwards;
+  &.next {
+    animation: 500ms next ease forwards;
 
-    @keyframes slideF {
+    @keyframes next {
       from {
         transform: translateX(0%);
       }
@@ -34,10 +35,10 @@ const DIV_SLIDES = styled.div`
       }
     }
   }
-  &.slideBackward {
-    animation: 500ms slideB ease forwards;
+  &.prev {
+    animation: 500ms prev ease forwards;
 
-    @keyframes slideB {
+    @keyframes prev {
       from {
         transform: translateX(0%);
       }
@@ -59,10 +60,11 @@ const DIV_BUTTON = styled.div`
 export default class Slideshow extends React.Component {
   constructor(props) {
     super(props);
+    this.DIV_SLIDES = React.createRef();
+    this.prev = React.createRef();
+
     this.state = {
       slideNumber: 0,
-      slideForward: false,
-      slideBackward: false,
     };
 
     this.slides = [
@@ -112,36 +114,36 @@ export default class Slideshow extends React.Component {
   }
 
   handleClick = (e) => {
-    let id = e.target.id;
-    let { slideForward, slideBackward, slideNumber } = this.state;
+    const { slideNumber } = this.state;
+    const id = e.target.id;
 
-    if (!slideForward && !slideBackward) {
-      this.setState(
-        {
-          slideBackward: id == 'prev' ? true : false,
-          slideForward: id == 'next' ? true : false,
-        },
-        () => {
-          setTimeout(() => {
-            if (id == 'prev') {
-              this.setState({
-                slideBackward: false,
-                slideNumber:
-                  slideNumber == 0 ? this.slides.length - 1 : slideNumber - 1,
-              });
-            }
+    this.DIV_SLIDES.current.classList.add(id);
 
-            if (id == 'next') {
-              this.setState({
-                slideForward: false,
-                slideNumber:
-                  slideNumber == this.slides.length - 1 ? 0 : slideNumber + 1,
-              });
-            }
-          }, 500);
+    const getSlideNumber = () => {
+      if (id == 'prev') {
+        if (slideNumber == 0) {
+          return this.slides.length - 1;
+        } else {
+          return slideNumber - 1;
         }
-      );
-    }
+      }
+
+      if (id == 'next') {
+        if (slideNumber == this.slides.length - 1) {
+          return 0;
+        } else {
+          return slideNumber + 1;
+        }
+      }
+    };
+
+    this.DIV_SLIDES.current.onanimationend = () => {
+      this.DIV_SLIDES.current.classList.remove(id);
+
+      this.setState({
+        slideNumber: getSlideNumber(),
+      });
+    };
   };
 
   render() {
@@ -153,17 +155,9 @@ export default class Slideshow extends React.Component {
 
     return (
       <DIV_WRAPPER>
-        <DIV_SLIDES
-          className={
-            this.state.slideBackward
-              ? 'slideBackward'
-              : this.state.slideForward
-              ? 'slideForward'
-              : ''
-          }
-        >
-          <Slide data={this.slides[prevSlide]} />
-          <Slide middle={true} data={this.slides[visibleSlide]} />
+        <DIV_SLIDES ref={this.DIV_SLIDES}>
+          <Slide ref={this.prev} data={this.slides[prevSlide]} />
+          <Slide data={this.slides[visibleSlide]} />
           <Slide data={this.slides[nextSlide]} />
         </DIV_SLIDES>
         <DIV_BUTTON className='BUTTON BUTTON BUTTON'>
