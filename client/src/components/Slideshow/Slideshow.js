@@ -1,11 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Slide from './Slide';
 
 const DIV_WRAPPER = styled.div`
   overflow: hidden;
   position: relative;
+`;
+
+const next = keyframes`
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
+
+const prev = keyframes`
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 `;
 
 const DIV_SLIDES = styled.div`
@@ -24,28 +42,10 @@ const DIV_SLIDES = styled.div`
   }
 
   &.next {
-    animation: 500ms next ease forwards;
-
-    @keyframes next {
-      from {
-        transform: translateX(0%);
-      }
-      to {
-        transform: translateX(-100%);
-      }
-    }
+    animation: 1000ms ${next} ease;
   }
   &.prev {
-    animation: 500ms prev ease forwards;
-
-    @keyframes prev {
-      from {
-        transform: translateX(0%);
-      }
-      to {
-        transform: translateX(100%);
-      }
-    }
+    animation: 1000ms ${prev} ease;
   }
 `;
 
@@ -116,8 +116,13 @@ export default class Slideshow extends React.Component {
   handleClick = (e) => {
     const { slideNumber } = this.state;
     const id = e.target.id;
+    const DIV_SLIDES = this.DIV_SLIDES.current;
 
-    this.DIV_SLIDES.current.classList.add(id);
+    DIV_SLIDES.children[0].querySelector('p').classList.add('hide');
+    DIV_SLIDES.children[1].querySelector('p').classList.remove('fade');
+    DIV_SLIDES.children[2].querySelector('p').classList.add('hide');
+
+    DIV_SLIDES.classList.add(id);
 
     const getSlideNumber = () => {
       if (id == 'prev') {
@@ -138,11 +143,18 @@ export default class Slideshow extends React.Component {
     };
 
     this.DIV_SLIDES.current.onanimationend = () => {
-      this.DIV_SLIDES.current.classList.remove(id);
+      DIV_SLIDES.classList.remove(id);
+      DIV_SLIDES.children[1].querySelector('p').classList.add('hide');
 
-      this.setState({
-        slideNumber: getSlideNumber(),
-      });
+      this.setState(
+        {
+          slideNumber: getSlideNumber(),
+        },
+        () => {
+          DIV_SLIDES.children[1].querySelector('p').classList.remove('hide');
+          DIV_SLIDES.children[1].querySelector('p').classList.add('fade');
+        }
+      );
     };
   };
 
@@ -157,7 +169,7 @@ export default class Slideshow extends React.Component {
       <DIV_WRAPPER>
         <DIV_SLIDES ref={this.DIV_SLIDES}>
           <Slide ref={this.prev} data={this.slides[prevSlide]} />
-          <Slide data={this.slides[visibleSlide]} />
+          <Slide visible={true} data={this.slides[visibleSlide]} />
           <Slide data={this.slides[nextSlide]} />
         </DIV_SLIDES>
         <DIV_BUTTON className='BUTTON BUTTON BUTTON'>

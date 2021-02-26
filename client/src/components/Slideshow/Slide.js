@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const DIV_SLIDE = styled.div`
   display: flex;
@@ -15,9 +15,24 @@ const DIV_SLIDE = styled.div`
   }
 `;
 
+const fade = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+
+`;
+
 const Para = styled.p`
-  transition: opacity ease 500ms;
-  // opacity: ${(props) => (props.middle ? '1' : '0')};
+  &.hide {
+    opacity: 0;
+  }
+
+  &.fade {
+    animation: ${fade} 1000ms ease;
+  }
 `;
 
 export default class Slide extends React.Component {
@@ -29,7 +44,7 @@ export default class Slide extends React.Component {
     return (
       <DIV_SLIDE>
         <img src={this.props.data.url} alt='' />
-        <Para>
+        <Para visible={this.props.visible}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
