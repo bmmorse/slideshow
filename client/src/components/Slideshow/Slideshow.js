@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 import Slide from './Slide';
+import SlideData from './Data';
 
 const DIV_WRAPPER = styled.div`
   overflow: hidden;
@@ -42,10 +42,10 @@ const DIV_SLIDES = styled.div`
   }
 
   &.next {
-    animation: 1000ms ${next} ease;
+    animation: 500ms ${next} ease;
   }
   &.prev {
-    animation: 1000ms ${prev} ease;
+    animation: 500ms ${prev} ease;
   }
 `;
 
@@ -61,79 +61,27 @@ export default class Slideshow extends React.Component {
   constructor(props) {
     super(props);
     this.DIV_SLIDES = React.createRef();
-    this.prev = React.createRef();
 
     this.state = {
       slideNumber: 0,
     };
 
-    this.slides = [
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1613929905911-96040610a54d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1468863823688-36ac11ede785?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1449960238630-7e720e630019?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1490823670292-6699d9edbb7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1613938863787-e29426163d7c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1613855234677-e06c162cd85e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=664&q=80',
-      },
-      {
-        desc: 'Some amazing mountains',
-        name: 'first',
-        url:
-          'https://images.unsplash.com/photo-1594123582884-6c88a690210b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-      },
-    ];
+    this.slides = SlideData;
   }
 
   handleClick = (e) => {
-    const { slideNumber } = this.state;
     const id = e.target.id;
     const DIV_SLIDES = this.DIV_SLIDES.current;
 
-    DIV_SLIDES.children[0].querySelector('p').classList.add('hide');
-    DIV_SLIDES.children[1].querySelector('p').classList.remove('fade');
-    DIV_SLIDES.children[2].querySelector('p').classList.add('hide');
-
-    DIV_SLIDES.classList.add(id);
-
-    const getSlideNumber = () => {
+    const setSlideNumber = () => {
+      const { slideNumber } = this.state;
       if (id == 'prev') {
         if (slideNumber == 0) {
           return this.slides.length - 1;
         } else {
           return slideNumber - 1;
         }
-      }
-
-      if (id == 'next') {
+      } else {
         if (slideNumber == this.slides.length - 1) {
           return 0;
         } else {
@@ -142,13 +90,19 @@ export default class Slideshow extends React.Component {
       }
     };
 
+    DIV_SLIDES.children[0].querySelector('p').classList.add('hide');
+    DIV_SLIDES.children[1].querySelector('p').classList.remove('fade');
+    DIV_SLIDES.children[2].querySelector('p').classList.add('hide');
+
+    DIV_SLIDES.classList.add(id);
+
     this.DIV_SLIDES.current.onanimationend = () => {
       DIV_SLIDES.classList.remove(id);
       DIV_SLIDES.children[1].querySelector('p').classList.add('hide');
 
       this.setState(
         {
-          slideNumber: getSlideNumber(),
+          slideNumber: setSlideNumber(),
         },
         () => {
           DIV_SLIDES.children[1].querySelector('p').classList.remove('hide');
@@ -158,21 +112,35 @@ export default class Slideshow extends React.Component {
     };
   };
 
-  render() {
-    const visibleSlide = this.state.slideNumber;
-    const prevSlide =
-      visibleSlide - 1 == -1 ? this.slides.length - 1 : visibleSlide - 1;
-    const nextSlide =
-      visibleSlide + 1 == this.slides.length ? 0 : visibleSlide + 1;
+  getPrevSlide = () => {
+    const { slideNumber } = this.state;
 
+    if (slideNumber - 1 < 0) {
+      return this.slides[this.slides.length - 1];
+    } else {
+      return this.slides[slideNumber - 1];
+    }
+  };
+
+  getNextSlide = () => {
+    const { slideNumber } = this.state;
+
+    if (slideNumber + 1 == this.slides.length) {
+      return this.slides[0];
+    } else {
+      return this.slides[slideNumber + 1];
+    }
+  };
+
+  render() {
     return (
       <DIV_WRAPPER>
         <DIV_SLIDES ref={this.DIV_SLIDES}>
-          <Slide ref={this.prev} data={this.slides[prevSlide]} />
-          <Slide visible={true} data={this.slides[visibleSlide]} />
-          <Slide data={this.slides[nextSlide]} />
+          <Slide data={this.getPrevSlide()} />
+          <Slide data={this.slides[this.state.slideNumber]} />
+          <Slide data={this.getNextSlide()} />
         </DIV_SLIDES>
-        <DIV_BUTTON className='BUTTON BUTTON BUTTON'>
+        <DIV_BUTTON>
           <button id='prev' onClick={this.handleClick}>
             prev
           </button>

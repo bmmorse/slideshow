@@ -1,7 +1,6 @@
 import React from 'react';
-import Sidebar from '../Sidebar';
-import Content from './Content';
 import styled from 'styled-components';
+import Slideshow from '../Slideshow/Slideshow';
 
 const DIV_HOME = styled.div`
   display: grid;
@@ -14,8 +13,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <DIV_HOME>
-        <Sidebar />
-        <Content />
+        <Slideshow />
       </DIV_HOME>
     );
   }
