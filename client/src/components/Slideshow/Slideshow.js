@@ -6,6 +6,7 @@ import SlideData from './Data';
 const DIV_WRAPPER = styled.div`
   overflow: hidden;
   position: relative;
+  width: 100%;
 `;
 
 const next = keyframes`
@@ -29,17 +30,8 @@ const prev = keyframes`
 const DIV_SLIDES = styled.div`
   height: 100vh;
   position: relative;
-  width: 100%;
-
-  div:nth-child(1) {
-    left: -100%;
-  }
-  div:nth-child(2) {
-    left: 0%;
-  }
-  div:nth-child(3) {
-    left: 100%;
-  }
+  display: flex;
+  right: 100%;
 
   &.next {
     animation: 500ms ${next} ease;
@@ -50,7 +42,7 @@ const DIV_SLIDES = styled.div`
 `;
 
 const DIV_BUTTON = styled.div`
-  background: rgba(255, 255, 255, 0.5);
+  background: red;
   height: 100px;
   position: absolute;
   bottom: 0;

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import Slideshow from '../Slideshow/Slideshow';
 
 const DIV_HOME = styled.div`
-  display: grid;
-  grid-template-areas: '. content';
-  grid-template-columns: 640px 1fr;
   width: 100%;
 `;
 

@@ -3,15 +3,13 @@ import styled, { keyframes } from 'styled-components';
 
 const DIV_SLIDE = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  position: absolute;
+  align-items: flex-start;
+  min-width: 100%;
+  padding: 4rem;
 
   img {
-    max-height: 80vh;
-    max-width: 100%;
+    min-width: 72%;
+    // min-height: 100%;
   }
 `;
 
