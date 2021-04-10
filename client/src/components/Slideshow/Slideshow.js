@@ -43,7 +43,7 @@ const DIV_SLIDES = styled.div`
 
 const DIV_BUTTON = styled.div`
   background: red;
-  width: 240px;
+  width: 40%;
   height: 80px;
   display: flex;
   position: absolute;
