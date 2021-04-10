@@ -18,25 +18,25 @@ const DIV_IMAGE = styled.div`
   background-position: center;
 `;
 
-const fade = keyframes`
+const fadeUp = keyframes`
   from {
     opacity: 0;
-    bottom: -40px;
+    transform: translateY(-40px);
   }
   to {
     opacity: 1; 
-    bottom: 0px;
+    transform: translateY(0px);
   }
 `;
 
 const fadeDown = keyframes`
   from {
     opacity: 0;
-    top: -40px;
+    transform: translateY(40px);
   }
   to {
     opacity: 1; 
-    top: 0px;
+    transform: translateY(0px);
   }
 `;
 
@@ -47,16 +47,24 @@ const DIV_TEXT = styled.div`
   align-items: center;
   justify-content: center;
 
-  .fade {
-    animation: ${fade} 300ms ease;
+  .fadeUp {
+    animation: ${fadeUp} 300ms ease;
   }
 
   .fadeDown {
     animation: ${fadeDown} 300ms ease;
   }
 
-  .hide {
+  .hideUp {
     opacity: 0;
+    transform: translateY(-40px);
+    transition: all 200ms ease;
+  }
+
+  .hideDown {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 200ms ease;
   }
 
   h1 {
@@ -84,10 +92,10 @@ export default class Slide extends React.Component {
       <DIV_SLIDE>
         <DIV_IMAGE src={data.url}></DIV_IMAGE>
         <DIV_TEXT>
-          <h1 className={animateSlide ? 'fadeDown' : 'hide'}>
+          <h1 className={animateSlide ? 'fadeUp' : 'hideUp'}>
             Ocean Jasper Sphere<br></br>68mm Madagascar
           </h1>
-          <p className={animateSlide ? 'fade' : 'hide'}>
+          <p className={animateSlide ? 'fadeDown' : 'hideDown'}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
