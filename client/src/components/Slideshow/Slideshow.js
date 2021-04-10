@@ -52,6 +52,10 @@ const DIV_BUTTON = styled.div`
 
   button {
     width: 100%;
+
+    &:disabled {
+      background: blue;
+    }
   }
 `;
 
@@ -137,10 +141,18 @@ export default class Slideshow extends React.Component {
           />
         </DIV_SLIDES>
         <DIV_BUTTON>
-          <button id='prev' onClick={this.handleClick}>
+          <button
+            id='prev'
+            onClick={this.handleClick}
+            disabled={animateSlide ? false : true}
+          >
             prev
           </button>
-          <button id='next' onClick={this.handleClick}>
+          <button
+            id='next'
+            onClick={this.handleClick}
+            disabled={animateSlide ? false : true}
+          >
             next
           </button>
         </DIV_BUTTON>
