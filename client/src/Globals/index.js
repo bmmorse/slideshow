@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import VAR from './variables';
+import './fonts.css';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,7 +26,7 @@ const GlobalCSS = createGlobalStyle`
   }
 
   body {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'ProxRegular';
   }
 
   a,a:visited {
@@ -38,19 +38,10 @@ const GlobalCSS = createGlobalStyle`
     width: 100%;
   }
 
-  h1 {
-    color: rgba(0, 0, 0, 0.80);
-    font-size: 80px;
-    line-height: 1;
-  }
+h1,h2,h3,h4 {
+  font-weight: normal;
+}
 
-  h4 {
-    color: rgba(0, 0, 0, 0.80);
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 12px;
-    line-height: 1;
-  }
 `;
 
 export default class Globals extends React.Component {

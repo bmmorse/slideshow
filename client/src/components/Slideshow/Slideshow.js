@@ -43,10 +43,15 @@ const DIV_SLIDES = styled.div`
 
 const DIV_BUTTON = styled.div`
   background: red;
-  height: 100px;
+  width: 240px;
+  height: 80px;
+  display: flex;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  right: 0;
+  button {
+    width: 100%;
+  }
 `;
 
 export default class Slideshow extends React.Component {
@@ -91,7 +96,6 @@ export default class Slideshow extends React.Component {
 
     DIV_SLIDES.onanimationend = () => {
       DIV_SLIDES.classList.remove(id);
-      DIV_SLIDES.children[1].querySelector('p').classList.add('hide');
 
       this.setState(
         {
@@ -106,7 +110,7 @@ export default class Slideshow extends React.Component {
   };
 
   render() {
-    const { slideNumber } = this.state;
+    const { slideNumber, animateText } = this.state;
     const slides = this.slides;
     return (
       <DIV_WRAPPER>

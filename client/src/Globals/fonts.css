@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'ProxBold';
+  src: url('fonts/ProxBold') format('woff');
+}
+
+@font-face {
+  font-family: 'ProxLight';
+  src: url('fonts/ProxLight') format('woff');
+}
+
+@font-face {
+  font-family: 'ProxRegular';
+  src: url('fonts/ProxRegular') format('woff');
+}
