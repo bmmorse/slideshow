@@ -62,13 +62,20 @@ export default class Slideshow extends React.Component {
 
     this.state = {
       slideNumber: 0,
+      animateSlide: false,
     };
 
     this.slides = SlideData;
   }
 
+  componentDidMount() {
+    this.setState({
+      animateSlide: true,
+    });
+  }
+
   handleClick = (e) => {
-    const { slideNumber } = this.state;
+    const { slideNumber, animateSlide } = this.state;
     const id = e.target.id;
     const DIV_SLIDES = this.DIV_SLIDES.current;
     const slides = this.slides;
@@ -89,50 +96,39 @@ export default class Slideshow extends React.Component {
       }
     })();
 
-    DIV_SLIDES.children[0].querySelector('p').classList.add('hide');
-    DIV_SLIDES.children[0].querySelector('h1').classList.add('hide');
-
-    DIV_SLIDES.children[1].querySelector('p').classList.remove('fade');
-    DIV_SLIDES.children[1].querySelector('h1').classList.remove('fadeDown');
-
-    DIV_SLIDES.children[2].querySelector('h1').classList.add('hide');
-    DIV_SLIDES.children[2].querySelector('p').classList.add('hide');
+    this.setState({
+      animateSlide: false,
+    });
 
     DIV_SLIDES.classList.add(id);
 
     DIV_SLIDES.onanimationend = () => {
       DIV_SLIDES.classList.remove(id);
 
-      this.setState(
-        {
-          slideNumber: newSlideNumber,
-        },
-        () => {
-          DIV_SLIDES.children[1].querySelector('p').classList.remove('hide');
-          DIV_SLIDES.children[1].querySelector('h1').classList.remove('hide');
-
-          DIV_SLIDES.children[1].querySelector('p').classList.add('fade');
-          DIV_SLIDES.children[1].querySelector('h1').classList.add('fadeDown');
-        }
-      );
+      this.setState({
+        slideNumber: newSlideNumber,
+        animateSlide: true,
+      });
     };
   };
 
   render() {
-    const { slideNumber, animateText } = this.state;
+    const { slideNumber, animateSlide } = this.state;
     const slides = this.slides;
     return (
       <DIV_WRAPPER>
         <DIV_SLIDES ref={this.DIV_SLIDES}>
           <Slide
+            animateSlide={animateSlide}
             data={
               slideNumber - 1 < 0
                 ? slides[slides.length - 1]
                 : slides[slideNumber - 1]
             }
           />
-          <Slide data={slides[slideNumber]} />
+          <Slide animateSlide={animateSlide} data={slides[slideNumber]} />
           <Slide
+            animateSlide={animateSlide}
             data={
               slideNumber + 1 == slides.length
                 ? slides[0]

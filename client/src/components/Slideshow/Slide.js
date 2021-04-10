@@ -21,7 +21,7 @@ const DIV_IMAGE = styled.div`
 const fade = keyframes`
   from {
     opacity: 0;
-    bottom: -20px;
+    bottom: -40px;
   }
   to {
     opacity: 1; 
@@ -32,7 +32,7 @@ const fade = keyframes`
 const fadeDown = keyframes`
   from {
     opacity: 0;
-    top: -20px;
+    top: -40px;
   }
   to {
     opacity: 1; 
@@ -48,11 +48,11 @@ const DIV_TEXT = styled.div`
   justify-content: center;
 
   .fade {
-    animation: ${fade} 200ms ease;
+    animation: ${fade} 300ms ease;
   }
 
   .fadeDown {
-    animation: ${fadeDown} 200ms ease;
+    animation: ${fadeDown} 300ms ease;
   }
 
   .hide {
@@ -79,15 +79,15 @@ export default class Slide extends React.Component {
   }
 
   render() {
-    const { animateText, data } = this.props;
+    const { animateSlide, data } = this.props;
     return (
       <DIV_SLIDE>
         <DIV_IMAGE src={data.url}></DIV_IMAGE>
         <DIV_TEXT>
-          <h1>
+          <h1 className={animateSlide ? 'fadeDown' : 'hide'}>
             Ocean Jasper Sphere<br></br>68mm Madagascar
           </h1>
-          <p>
+          <p className={animateSlide ? 'fade' : 'hide'}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
