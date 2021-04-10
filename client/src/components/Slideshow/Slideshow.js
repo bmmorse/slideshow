@@ -49,6 +49,7 @@ const DIV_BUTTON = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+
   button {
     width: 100%;
   }
@@ -89,7 +90,12 @@ export default class Slideshow extends React.Component {
     })();
 
     DIV_SLIDES.children[0].querySelector('p').classList.add('hide');
+    DIV_SLIDES.children[0].querySelector('h1').classList.add('hide');
+
     DIV_SLIDES.children[1].querySelector('p').classList.remove('fade');
+    DIV_SLIDES.children[1].querySelector('h1').classList.remove('fadeDown');
+
+    DIV_SLIDES.children[2].querySelector('h1').classList.add('hide');
     DIV_SLIDES.children[2].querySelector('p').classList.add('hide');
 
     DIV_SLIDES.classList.add(id);
@@ -103,7 +109,10 @@ export default class Slideshow extends React.Component {
         },
         () => {
           DIV_SLIDES.children[1].querySelector('p').classList.remove('hide');
+          DIV_SLIDES.children[1].querySelector('h1').classList.remove('hide');
+
           DIV_SLIDES.children[1].querySelector('p').classList.add('fade');
+          DIV_SLIDES.children[1].querySelector('h1').classList.add('fadeDown');
         }
       );
     };

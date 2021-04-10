@@ -29,6 +29,17 @@ const fade = keyframes`
   }
 `;
 
+const fadeDown = keyframes`
+  from {
+    opacity: 0;
+    top: -20px;
+  }
+  to {
+    opacity: 1; 
+    top: 0px;
+  }
+`;
+
 const DIV_TEXT = styled.div`
   flex: 0 1 40%;
   display: flex;
@@ -36,9 +47,22 @@ const DIV_TEXT = styled.div`
   align-items: center;
   justify-content: center;
 
+  .fade {
+    animation: ${fade} 200ms ease;
+  }
+
+  .fadeDown {
+    animation: ${fadeDown} 200ms ease;
+  }
+
+  .hide {
+    opacity: 0;
+  }
+
   h1 {
     font-family: 'ProxLight';
     font-size: 48px;
+    position: relative;
     line-height: 64px;
   }
 
@@ -46,14 +70,6 @@ const DIV_TEXT = styled.div`
     max-width: 384px;
     position: relative;
     width: 60%;
-
-    &.fade {
-      animation: ${fade} 200ms ease;
-    }
-
-    &.hide {
-      opacity: 0;
-    }
   }
 `;
 
