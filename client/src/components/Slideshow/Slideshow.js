@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Slide from './Slide';
 import SlideData from './Data';
+import prevSVG from '../../Globals/svg/prev.svg';
+import nextSVG from '../../Globals/svg/next.svg';
 
 const DIV_WRAPPER = styled.div`
   overflow: hidden;
@@ -42,8 +44,7 @@ const DIV_SLIDES = styled.div`
 `;
 
 const DIV_BUTTON = styled.div`
-  background: red;
-  width: 40%;
+  width: 200px;
   height: 80px;
   display: flex;
   position: absolute;
@@ -51,10 +52,21 @@ const DIV_BUTTON = styled.div`
   right: 0;
 
   button {
+    background: hsla(0, 0%, 0%, 1);
+    border: none;
     width: 100%;
+    transition: background 300ms ease;
 
     &:disabled {
       background: blue;
+    }
+
+    &:hover {
+      background: yellow;
+    }
+
+    img {
+      height: 32%;
     }
   }
 `;
@@ -84,7 +96,15 @@ export default class Slideshow extends React.Component {
     const DIV_SLIDES = this.DIV_SLIDES.current;
     const slides = this.slides;
 
-    const newSlideNumber = (function setSlideNumber() {
+    const slideClassName = (() => {
+      if (e.target.id === 'prev') {
+        return 'prev';
+      } else {
+        return 'next';
+      }
+    })();
+
+    const newSlideNumber = (() => {
       if (id == 'prev') {
         if (slideNumber == 0) {
           return slides.length - 1;
@@ -104,16 +124,16 @@ export default class Slideshow extends React.Component {
       animateSlide: false,
     });
 
-    DIV_SLIDES.classList.add(id);
-
     DIV_SLIDES.onanimationend = () => {
-      DIV_SLIDES.classList.remove(id);
+      DIV_SLIDES.classList.remove(slideClassName);
 
       this.setState({
         slideNumber: newSlideNumber,
         animateSlide: true,
       });
     };
+
+    DIV_SLIDES.classList.add(slideClassName);
   };
 
   render() {
@@ -146,14 +166,14 @@ export default class Slideshow extends React.Component {
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
           >
-            prev
+            <img src={prevSVG} alt='' />
           </button>
           <button
             id='next'
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
           >
-            next
+            <img src={nextSVG} alt='' />
           </button>
         </DIV_BUTTON>
       </DIV_WRAPPER>
