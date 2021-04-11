@@ -45,24 +45,39 @@ const DIV_SLIDES = styled.div`
 
 const DIV_BUTTON = styled.div`
   width: 200px;
-  height: 80px;
+  height: 60px;
   display: flex;
   position: absolute;
   bottom: 50px;
   right: calc(16.5% - 100px);
+  box-shadow: 0 6px 30px -10px hsla(0, 0%, 0%, 0.4);
+  border-radius: 8px;
 
   button {
-    background: hsla(0, 0%, 0%, 1);
+    background: hsla(225, 6%, 13%, 1);
     border: none;
     width: 100%;
     transition: background 300ms ease;
 
+    &:nth-child(1) {
+      border-radius: 8px 0 0 8px;
+    }
+
+    &:nth-child(2) {
+      border-radius: 0 8px 8px 0;
+    }
+
+    &:active {
+      background: hsla(225, 6%, 13%, 0) !important;
+      outline: none;
+    }
+
     &:disabled {
-      background: blue !important;
+      background: hsla(225, 6%, 13%, 1);
     }
 
     &:hover {
-      background: yellow;
+      background: hsla(225, 0%, 90%, 1);
     }
 
     img {
