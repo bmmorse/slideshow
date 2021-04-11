@@ -8,7 +8,7 @@ const DIV_SLIDE = styled.div`
 
 const DIV_IMAGE = styled.div`
   overflow: hidden;
-  width: 60%;
+  width: 67%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ const fadeDown = keyframes`
 `;
 
 const DIV_TEXT = styled.div`
-  width: 40%;
+  width: 33%;
   display: flex;
   flex-direction: column;
   align-items: center;

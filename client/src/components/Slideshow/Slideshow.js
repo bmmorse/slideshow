@@ -48,8 +48,8 @@ const DIV_BUTTON = styled.div`
   height: 80px;
   display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 50px;
+  right: calc(16.5% - 100px);
 
   button {
     background: hsla(0, 0%, 0%, 1);
@@ -58,7 +58,7 @@ const DIV_BUTTON = styled.div`
     transition: background 300ms ease;
 
     &:disabled {
-      background: blue;
+      background: blue !important;
     }
 
     &:hover {
