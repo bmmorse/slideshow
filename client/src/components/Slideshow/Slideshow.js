@@ -91,8 +91,7 @@ export default class Slideshow extends React.Component {
   }
 
   handleClick = (e) => {
-    const { slideNumber, animateSlide } = this.state;
-    const id = e.target.id;
+    const { slideNumber } = this.state;
     const DIV_SLIDES = this.DIV_SLIDES.current;
     const slides = this.slides;
 
@@ -105,7 +104,7 @@ export default class Slideshow extends React.Component {
     })();
 
     const newSlideNumber = (() => {
-      if (id == 'prev') {
+      if (slideClassName == 'prev') {
         if (slideNumber == 0) {
           return slides.length - 1;
         } else {
