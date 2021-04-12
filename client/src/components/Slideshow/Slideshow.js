@@ -52,21 +52,19 @@ const DIV_BUTTON = styled.div`
   right: 10%;
   box-shadow: 0 6px 30px -10px hsla(0, 0%, 0%, 0.4);
   border-radius: 8px;
-
+  -webkit-backface-visibility: hidden;
   @media (min-width: 1152px) {
     width: 200px;
     height: 60px;
     bottom: 80px;
-    border-radius: 3rem;
+    border-radius: 8px;
     right: calc(12% - 100px);
   }
 `;
 
-const BUTTON = styled.input`
+const BUTTON = styled.button`
   border: none;
   width: 100%;
-  padding: 8px;
-  overflow: hidden;
   // transition: background-color 300ms ease;
   display: flex;
   justify-content: center;
@@ -80,21 +78,27 @@ const BUTTON = styled.input`
   }
 
   &:disabled {
-    // background: yellow;
+    // background: inherit;
   }
 
-  @media (hover: hover) {
-    &:hover {
-      background-color: hsla(225, 0%, 94%, 0.4);
-    }
-  }
+  // @media (hover: hover) {
+  //   &:hover {
+  //     background-color: hsla(225, 0%, 94%, 0.4);
+  //   }
+  // }
 
   &:hover {
-    background: none;
+    // background: inherit;
   }
 
   &:active {
-    outline: none;
+    // outline: none;
+    // background: inherit;
+  }
+
+  img {
+    height: 50%;
+    pointer-events: none;
   }
 
   @media (min-width: 1152px) {
@@ -212,17 +216,17 @@ export default class Slideshow extends React.Component {
             id='prev'
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
-            src={prevSVG}
-            type='image'
-          ></BUTTON>
+          >
+            <img src={prevSVG} alt='' />
+          </BUTTON>
           <DIV_DIVIDER />
           <BUTTON
             id='next'
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
-            src={nextSVG}
-            type='image'
-          ></BUTTON>
+          >
+            <img src={nextSVG} alt='' />
+          </BUTTON>
         </DIV_BUTTON>
       </DIV_WRAPPER>
     );

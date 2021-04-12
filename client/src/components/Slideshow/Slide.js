@@ -58,6 +58,8 @@ const DIV_TEXT = styled.div`
   padding-left: 10%;
   justify-content: center;
   height: 160px;
+  min-height: 160px;
+
   color: hsla(225, 6%, 13%, 1);
 
   .fadeUp {
