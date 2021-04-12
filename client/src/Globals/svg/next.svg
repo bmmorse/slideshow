@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="95px" viewBox="0 0 50 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg  viewBox="0 0 50 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
     <title>next</title>
     <desc>Created with Sketch.</desc>
     <g id="OJ" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-295.000000, -206.000000)" fill="#FFFFFF">
+        <g id="Artboard" transform="translate(-295.000000, -206.000000)" fill="#E5E5E5">
             <g id="next" transform="translate(295.000000, 206.000000)">
                 <path d="M49.0056533,50.0262466 L5.79547737,93.2364225 C4.46968175,94.5622181 2.32014234,94.5622181 0.994346716,93.2364225 C-0.331448905,91.9106269 -0.331448905,89.7610875 0.994346716,88.4352919 L44.2045226,45.2251159 C45.5303182,43.8993203 47.6798577,43.8993203 49.0056533,45.2251159 C50.3314489,46.5509116 50.3314489,48.700451 49.0056533,50.0262466 Z" id="Rectangle"></path>
                 <path d="M49.0056533,49.0056533 C47.6798577,50.3314489 45.5303182,50.3314489 44.2045226,49.0056533 L0.994346716,5.79547737 C-0.331448905,4.46968175 -0.331448905,2.32014234 0.994346716,0.994346716 C2.32014234,-0.331448905 4.46968175,-0.331448905 5.79547737,0.994346716 L49.0056533,44.2045226 C50.3314489,45.5303182 50.3314489,47.6798577 49.0056533,49.0056533 Z" id="Rectangle-Copy"></path>

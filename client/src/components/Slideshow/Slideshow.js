@@ -30,10 +30,10 @@ const prev = keyframes`
 `;
 
 const DIV_SLIDES = styled.div`
-  height: 100vh;
   position: relative;
   display: flex;
   right: 100%;
+  height: 100%;
 
   &.next {
     animation: 500ms ${next} ease;
@@ -44,21 +44,60 @@ const DIV_SLIDES = styled.div`
 `;
 
 const DIV_BUTTON = styled.div`
-  width: 200px;
-  height: 60px;
+  width: 150px;
+  height: 46px;
   display: flex;
   position: absolute;
-  bottom: 50px;
-  right: calc(16.5% - 100px);
+  bottom: 57px;
+  right: 10%;
   box-shadow: 0 6px 30px -10px hsla(0, 0%, 0%, 0.4);
   border-radius: 8px;
 
-  button {
-    background: hsla(225, 6%, 13%, 1);
-    border: none;
-    width: 100%;
-    transition: background 300ms ease;
+  @media (min-width: 1152px) {
+    width: 200px;
+    height: 60px;
+    bottom: 80px;
+    border-radius: 3rem;
+    right: calc(12% - 100px);
+  }
+`;
 
+const BUTTON = styled.input`
+  border: none;
+  width: 100%;
+  padding: 8px;
+  overflow: hidden;
+  // transition: background-color 300ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:nth-child(1) {
+    border-radius: 0;
+  }
+
+  &:nth-child(2) {
+    border-radius: 0;
+  }
+
+  &:disabled {
+    // background: yellow;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: hsla(225, 0%, 94%, 0.4);
+    }
+  }
+
+  &:hover {
+    background: none;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  @media (min-width: 1152px) {
     &:nth-child(1) {
       border-radius: 8px 0 0 8px;
     }
@@ -66,30 +105,20 @@ const DIV_BUTTON = styled.div`
     &:nth-child(2) {
       border-radius: 0 8px 8px 0;
     }
-
-    &:active {
-      background: hsla(225, 6%, 13%, 0) !important;
-      outline: none;
-    }
-
-    &:disabled {
-      background: hsla(225, 6%, 13%, 1);
-    }
-
-    &:hover {
-      background: hsla(225, 0%, 90%, 1);
-    }
-
-    img {
-      height: 32%;
-    }
   }
+`;
+
+const DIV_DIVIDER = styled.div`
+  height: 100%;
+  width: 1px;
+  background: hsla(225, 0%, 94%, 0.4);
 `;
 
 export default class Slideshow extends React.Component {
   constructor(props) {
     super(props);
     this.DIV_SLIDES = React.createRef();
+    this.innerHeight = React.createRef();
 
     this.state = {
       slideNumber: 0,
@@ -100,6 +129,9 @@ export default class Slideshow extends React.Component {
   }
 
   componentDidMount() {
+    const wrapper = this.innerHeight.current;
+    wrapper.style.height = `${window.innerHeight}px`;
+
     this.setState({
       animateSlide: true,
     });
@@ -108,6 +140,7 @@ export default class Slideshow extends React.Component {
   handleClick = (e) => {
     const { slideNumber } = this.state;
     const DIV_SLIDES = this.DIV_SLIDES.current;
+
     const slides = this.slides;
 
     const slideClassName = (() => {
@@ -154,7 +187,7 @@ export default class Slideshow extends React.Component {
     const { slideNumber, animateSlide } = this.state;
     const slides = this.slides;
     return (
-      <DIV_WRAPPER>
+      <DIV_WRAPPER ref={this.innerHeight}>
         <DIV_SLIDES ref={this.DIV_SLIDES}>
           <Slide
             animateSlide={animateSlide}
@@ -175,20 +208,21 @@ export default class Slideshow extends React.Component {
           />
         </DIV_SLIDES>
         <DIV_BUTTON>
-          <button
+          <BUTTON
             id='prev'
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
-          >
-            <img src={prevSVG} alt='' />
-          </button>
-          <button
+            src={prevSVG}
+            type='image'
+          ></BUTTON>
+          <DIV_DIVIDER />
+          <BUTTON
             id='next'
             onClick={this.handleClick}
             disabled={animateSlide ? false : true}
-          >
-            <img src={nextSVG} alt='' />
-          </button>
+            src={nextSVG}
+            type='image'
+          ></BUTTON>
         </DIV_BUTTON>
       </DIV_WRAPPER>
     );

@@ -23,10 +23,13 @@ const GlobalCSS = createGlobalStyle`
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
   }
+
 
   body {
     font-family: 'ProxRegular';
+    height:100%;
   }
 
   a,a:visited {
