@@ -30,6 +30,7 @@ const GlobalCSS = createGlobalStyle`
   body {
     font-family: 'ProxRegular';
     height:100%;
+    overscroll-behavior-y: auto;
   }
 
   a,a:visited {

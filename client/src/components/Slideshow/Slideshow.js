@@ -48,11 +48,17 @@ const DIV_BUTTON = styled.div`
   height: 46px;
   display: flex;
   position: absolute;
-  bottom: 57px;
-  right: 10%;
+  bottom: 160px;
+  right: 0%;
   box-shadow: 0 6px 30px -10px hsla(0, 0%, 0%, 0.4);
-  border-radius: 8px;
-  -webkit-backface-visibility: hidden;
+
+  #prev {
+    border-radius: 8px 0 0 8px;
+  }
+  #next {
+    border-radius: 0 8px 8px 0;
+  }
+
   @media (min-width: 1152px) {
     width: 200px;
     height: 60px;
@@ -66,16 +72,10 @@ const BUTTON = styled.button`
   border: none;
   width: 100%;
   // transition: background-color 300ms ease;
+  background: hsla(0, 0%, 100%, 0.24);
   display: flex;
   justify-content: center;
   align-items: center;
-  &:nth-child(1) {
-    border-radius: 0;
-  }
-
-  &:nth-child(2) {
-    border-radius: 0;
-  }
 
   &:disabled {
     // background: inherit;
@@ -134,7 +134,7 @@ export default class Slideshow extends React.Component {
 
   componentDidMount() {
     const wrapper = this.innerHeight.current;
-    wrapper.style.height = `${window.innerHeight}px`;
+    wrapper.style.height = `${window.innerHeight + 1}px`;
 
     this.setState({
       animateSlide: true,
