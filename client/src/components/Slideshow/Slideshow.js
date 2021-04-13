@@ -78,7 +78,6 @@ const BUTTON = styled.button`
   align-items: center;
 
   &:disabled {
-    // background: inherit;
   }
 
   // @media (hover: hover) {
