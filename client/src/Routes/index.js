@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from '../components/Home/index';
+import Slideshow from '../components/Slideshow/Slideshow';
 
 /**
  * @props {object} config | the config object from <App />
@@ -10,7 +10,7 @@ export default class Routes extends React.Component {
     return (
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <Slideshow />
         </Route>
       </Switch>
     );
