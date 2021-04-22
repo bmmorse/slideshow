@@ -12,6 +12,9 @@ export default class Routes extends React.Component {
         <Route exact path='/'>
           <Slideshow />
         </Route>
+        <Route exact path='/form'>
+          test
+        </Route>
       </Switch>
     );
   }
