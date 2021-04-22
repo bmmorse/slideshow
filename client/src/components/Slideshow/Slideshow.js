@@ -155,14 +155,14 @@ export default class Slideshow extends React.Component {
     })();
 
     const newSlideNumber = (() => {
-      if (slideClassName == 'prev') {
-        if (slideNumber == 0) {
+      if (slideClassName === 'prev') {
+        if (slideNumber === 0) {
           return slides.length - 1;
         } else {
           return slideNumber - 1;
         }
       } else {
-        if (slideNumber == slides.length - 1) {
+        if (slideNumber === slides.length - 1) {
           return 0;
         } else {
           return slideNumber + 1;
@@ -204,7 +204,7 @@ export default class Slideshow extends React.Component {
           <Slide
             animateSlide={animateSlide}
             data={
-              slideNumber + 1 == slides.length
+              slideNumber + 1 === slides.length
                 ? slides[0]
                 : slides[slideNumber + 1]
             }

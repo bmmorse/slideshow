@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const DIV_SLIDE = styled.div`
   display: flex;
@@ -109,10 +109,6 @@ const DIV_TEXT = styled.div`
 `;
 
 export default class Slide extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { animateSlide, data } = this.props;
     return (
