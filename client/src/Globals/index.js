@@ -40,11 +40,16 @@ const GlobalCSS = createGlobalStyle`
   .App {
     position: relative;
     width: 100%;
+    min-height: 100vh;
   }
 
-h1,h2,h3,h4 {
-  font-weight: normal;
-}
+  h1,h2,h3,h4 {
+    font-weight: normal;
+  }
+
+  ul {
+    list-style-type: none;
+  }
 
 `;
 

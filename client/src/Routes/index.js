@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Slideshow from '../components/Slideshow/Slideshow';
+import Slideshow from '../components/Slideshow';
+import Form from '../components/Form';
+import PS from '../components/PS';
 
 /**
  * @props {object} config | the config object from <App />
@@ -13,7 +15,10 @@ export default class Routes extends React.Component {
           <Slideshow />
         </Route>
         <Route exact path='/form'>
-          test
+          <Form />
+        </Route>
+        <Route exact path='/ps'>
+          <PS />
         </Route>
       </Switch>
     );
